@@ -1,10 +1,7 @@
-package Entity;
+package com.cabinet.demo.Entity;
 
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
@@ -17,11 +14,11 @@ import java.util.Date;
 @Entity
 @Setter
 @Getter
-@SQLDelete(sql = "UPDATE administration SET isActive = TRUE WHERE id=?")
-@Where(clause = "soft_delete = false")
+@SQLDelete(sql = "UPDATE administration SET is_active = TRUE WHERE id=?")
+@Where(clause = "is_active = false")
 @AllArgsConstructor
 @NoArgsConstructor
-@Table
+@Table(name="administration")
 public class Administration {
 
     @Id
@@ -38,17 +35,19 @@ public class Administration {
     @Column(nullable = false)
     private String lastName;
 
+    @Column
     private String phone;
+
+    @Column
     private String email;
 
     @Column(name = "date_admission", nullable = false)
     private Timestamp timestamp = Timestamp.from(Instant.now());
 
-    @Column(nullable = false)
+    @Column
     private Date dateOfBirth;
 
+    @Column
     private boolean isActive = Boolean.FALSE;;
-
-
 
 }
